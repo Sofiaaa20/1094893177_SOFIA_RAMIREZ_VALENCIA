@@ -1,0 +1,21 @@
+<router-outlet></router-outlet>
+
+<form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
+  <div id="heading">L O G I N</div>
+
+  <div class="field">
+    <input type="email" formControlName="email" class="input-field" placeholder="Email">
+    <!-- <span ngIf="loginForm.get('email').errors.required">El correo electrónico es obligatorio.</span> -->
+    <!-- <span ngIf="loginForm.get('email').errors.email">El correo electrónico no es válido.</span> -->
+  </div>
+
+  <div class="field">
+    <input type="password" formControlName="password" class="input-field" placeholder="Password">
+    <!-- <span ngIf="loginForm.get('password').errors.required">La contraseña es obligatoria.</span> -->
+  </div>
+
+  <div class="btn">
+    <button type="submit" class="button1" [disabled]="loginForm.invalid">Login</button>
+  </div>
+
+</form>
