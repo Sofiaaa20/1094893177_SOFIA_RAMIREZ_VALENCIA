@@ -1,21 +1,30 @@
-<router-outlet></router-outlet>
 
-<form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
-  <div id="heading">L O G I N</div>
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-  <div class="field">
-    <input type="email" formControlName="email" class="input-field" placeholder="Email">
-    <!-- <span ngIf="loginForm.get('email').errors.required">El correo electrónico es obligatorio.</span> -->
-    <!-- <span ngIf="loginForm.get('email').errors.email">El correo electrónico no es válido.</span> -->
-  </div>
+      <h1 class="form-title">Log In</h1>
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" formControlName="email" placeholder="Email" class="field">
+      </div>
+      <div  *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+        Correo electrónico no válido.
+      </div>
 
-  <div class="field">
-    <input type="password" formControlName="password" class="input-field" placeholder="Password">
-    <!-- <span ngIf="loginForm.get('password').errors.required">La contraseña es obligatoria.</span> -->
-  </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" placeholder="Password" class="field">
+      </div>
+      <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+        La contraseña debe tener al menos 8 caracteres.
+      </div>
 
-  <div class="btn">
-    <button type="submit" class="button1" [disabled]="loginForm.invalid">Login</button>
-  </div>
+      <button type="submit" [disabled]="loginForm.invalid" class="button1">Login</button>
+      <div *ngIf="loginForm.valid && submitted" class="success-message">
+        Los campos son válidos.
+      </div>
+      
+      <div *ngIf="!loginForm.valid && submitted" class="error-message">
+        Los campos no son válidos.
+      </div>
+  </form>
 
-</form>
